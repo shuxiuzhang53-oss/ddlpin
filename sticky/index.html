@@ -23,15 +23,15 @@
   #bar { -webkit-app-region: drag; display: flex; align-items: center; gap: 8px;
     padding: 9px 10px 8px; border-bottom: 1px solid var(--line); }
   #bar h1 { font-size: 12px; font-weight: 600; letter-spacing: .3px; color: var(--fg); }
-  #count { font-size: 11px; color: var(--muted); }
+  #count { font-size: 12px; color: var(--muted); }
   #bar .sp { flex: 1; }
   #bar button { -webkit-app-region: no-drag; width: 22px; height: 22px; border: none;
-    background: transparent; color: var(--muted); border-radius: 6px; cursor: pointer; font-size: 13px; }
+    background: transparent; color: var(--muted); border-radius: 6px; cursor: pointer; font-size: 12px; }
   #bar button:hover { background: rgba(255,255,255,0.1); color: var(--fg); }
   /* 输入 */
   #add { -webkit-app-region: no-drag; padding: 8px 10px; border-bottom: 1px solid var(--line); }
   #add input { width: 100%; border: none; outline: none; background: rgba(255,255,255,0.06);
-    color: var(--fg); border-radius: 8px; padding: 7px 9px; font-size: 12.5px; }
+    color: var(--fg); border-radius: 8px; padding: 7px 9px; font-size: 12px; }
   #add input::placeholder { color: var(--muted); }
   /* 列表 */
   #list { flex: 1; overflow-y: auto; padding: 4px 0; }
@@ -42,8 +42,8 @@
   .item:hover { background: rgba(255,255,255,0.04); }
   .item .bar { position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 2px; }
   .item .body { flex: 1; min-width: 0; }
-  .item .t { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--fg); word-break: break-word; }
-  .item .meta { font-size: 11px; color: var(--muted); margin-top: 3px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .item .t { font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--fg); word-break: break-word; }
+  .item .meta { font-size: 12px; color: var(--muted); margin-top: 3px; display: flex; gap: 6px; flex-wrap: wrap; }
   .item .cd.overdue { color: var(--red); font-weight: 600; }
   .item .proj { color: #7aa2f7; }
   .item .acts { display: none; gap: 4px; margin-left: 4px; }
@@ -60,8 +60,8 @@
   body.mini #pill { display: flex; }
   #pill { display: none; -webkit-app-region: drag; align-items: center; gap: 8px; padding: 0 10px 9px; }
   #pill .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-  #pill .pt { flex: 1; font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #pill .pc { font-size: 11px; color: var(--muted); }
+  #pill .pt { flex: 1; font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #pill .pc { font-size: 12px; color: var(--muted); }
   #pill .pc.overdue { color: var(--red); font-weight: 600; }
 </style>
 </head>
