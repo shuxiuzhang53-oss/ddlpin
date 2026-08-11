@@ -1,0 +1,20 @@
+{
+  "name": "ddlpin",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "本地任务中枢:任意 AI(CC/Codex/mirasim)顺口记任务 → 桌面便签常驻 → 到点升级式提醒。零第三方依赖(Node 内置 sqlite)。",
+  "license": "MIT",
+  "author": "Shuxiu Zhang",
+  "repository": { "type": "git", "url": "git+https://github.com/shuxiuzhang53-oss/ddlpin.git" },
+  "homepage": "https://github.com/shuxiuzhang53-oss/ddlpin#readme",
+  "engines": { "node": ">=22.5.0" },
+  "bin": {
+    "taskd": "src/daemon/main.js",
+    "taskboard-mcp": "src/mcp/server.js"
+  },
+  "scripts": {
+    "daemon": "node src/daemon/main.js",
+    "mcp": "node src/mcp/server.js",
+    "cli": "node src/cli.js"
+  }
+}

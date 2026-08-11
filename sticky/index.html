@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'; connect-src http://127.0.0.1:*" />
+<title>Taskboard</title>
+<style>
+  :root {
+    --bg: rgba(26, 27, 32, 0.92);
+    --fg: #e8e8ea; --muted: #9a9aa5;
+    --line: rgba(255,255,255,0.08);
+    --green:#42b883; --amber:#e6b450; --orange:#f0883e; --red:#f05a5a; --gray:#6b6b76;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: transparent; overflow: hidden;
+    font: 13px/1.4 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    color: var(--fg); -webkit-user-select: none; user-select: none; }
+  #card { height: 100vh; display: flex; flex-direction: column;
+    background: var(--bg); backdrop-filter: blur(20px); border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden; }
+  /* 标题栏(可拖动) */
+  #bar { -webkit-app-region: drag; display: flex; align-items: center; gap: 8px;
+    padding: 9px 10px 8px; border-bottom: 1px solid var(--line); }
+  #bar h1 { font-size: 12px; font-weight: 600; letter-spacing: .3px; color: var(--fg); }
+  #count { font-size: 11px; color: var(--muted); }
+  #bar .sp { flex: 1; }
+  #bar button { -webkit-app-region: no-drag; width: 22px; height: 22px; border: none;
+    background: transparent; color: var(--muted); border-radius: 6px; cursor: pointer; font-size: 13px; }
+  #bar button:hover { background: rgba(255,255,255,0.1); color: var(--fg); }
+  /* 输入 */
+  #add { -webkit-app-region: no-drag; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  #add input { width: 100%; border: none; outline: none; background: rgba(255,255,255,0.06);
+    color: var(--fg); border-radius: 8px; padding: 7px 9px; font-size: 12.5px; }
+  #add input::placeholder { color: var(--muted); }
+  /* 列表 */
+  #list { flex: 1; overflow-y: auto; padding: 4px 0; }
+  #list::-webkit-scrollbar { width: 6px; }
+  #list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 3px; }
+  .item { -webkit-app-region: no-drag; display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 10px 10px 13px; position: relative; }
+  .item:hover { background: rgba(255,255,255,0.04); }
+  .item .bar { position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 2px; }
+  .item .body { flex: 1; min-width: 0; }
+  .item .t { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--fg); word-break: break-word; }
+  .item .meta { font-size: 11px; color: var(--muted); margin-top: 3px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .item .cd.overdue { color: var(--red); font-weight: 600; }
+  .item .proj { color: #7aa2f7; }
+  .item .acts { display: none; gap: 4px; margin-left: 4px; }
+  .item:hover .acts { display: flex; }
+  .item .acts button { border: none; background: rgba(255,255,255,0.08); color: var(--fg);
+    width: 24px; height: 24px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  .item .acts button:hover { background: rgba(255,255,255,0.18); }
+  .empty { color: var(--muted); text-align: center; padding: 24px 12px; font-size: 12px; }
+  @keyframes flash { 0%,100%{opacity:1} 50%{opacity:.45} }
+  .item.od .bar { animation: flash 1.6s ease-in-out infinite; }
+  /* 迷你胶囊 */
+  body.mini #add, body.mini #list, body.mini #count { display: none; }
+  body.mini #bar { border-bottom: none; }
+  body.mini #pill { display: flex; }
+  #pill { display: none; -webkit-app-region: drag; align-items: center; gap: 8px; padding: 0 10px 9px; }
+  #pill .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  #pill .pt { flex: 1; font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #pill .pc { font-size: 11px; color: var(--muted); }
+  #pill .pc.overdue { color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+  <div id="card">
+    <div id="bar">
+      <h1>任务</h1><span id="count"></span>
+      <div class="sp"></div>
+      <button id="btnAdd" title="添加">＋</button>
+      <button id="btnMini" title="迷你/展开">▁</button>
+      <button id="btnQuit" title="退出">✕</button>
+    </div>
+    <div id="add"><input id="inp" placeholder="记一条… (回车添加)" /></div>
+    <div id="list"></div>
+    <div id="pill"><span class="dot"></span><span class="pt"></span><span class="pc"></span></div>
+  </div>
+<script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# deps
+node_modules/
+sticky/node_modules/
+
+# electron 下载/构建产物
+sticky/dist/
+sticky/out/
+
+# 运行期数据与日志(都在 ~/.taskboard,不该进仓库;以防万一)
+*.log
+.taskboard/
+
+# 本地工具/编辑器
+.claude/
+.impeccable/
+.DS_Store
+*.swp
+.idea/
+.vscode/
