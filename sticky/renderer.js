@@ -122,7 +122,7 @@ $('#btnMini').addEventListener('click', () => {
   autoResize();
 });
 $('#pill').addEventListener('click', () => { document.body.classList.remove('mini'); localStorage.setItem('mini', '0'); autoResize(); });
-$('#btnQuit').addEventListener('click', () => window.sticky?.quit());
+$('#btnQuit').addEventListener('click', () => window.sticky?.hide());
 
 // SSE:daemon 有变更就刷新
 function connectSSE() {
